@@ -4,10 +4,8 @@
 import streamlit as st
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome import service as fs
-from selenium.webdriver import ChromeOptions
-# from webdriver_manager.core.utils import ChromeType
-from webdriver_manager.core.os_manager import ChromeType
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import ChromeOptions
 from selenium.webdriver.common.by import By
 
 # タイトルを設定
@@ -32,11 +30,8 @@ if press_button:
     # webdriver_managerによりドライバーをインストール
     # chromiumを使用したいのでchrome_type引数でchromiumを指定しておく
     CHROMEDRIVER = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-    service = fs.Service(CHROMEDRIVER)
-    driver = webdriver.Chrome(
-                              options=options,
-                              service=service
-                             )
+    service = Service(CHROMEDRIVER)
+    driver = webdriver.Chrome(options=options, service=service)
 
     # URLで指定したwebページを開く
     driver.get(URL)
